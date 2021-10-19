@@ -12,7 +12,7 @@
   <main>
     <h1>Vanilla JavaScript App</h1>
     <p>Loading content from the API: <b id="name">...</b></p>
-    <p> <a href="/login?post_login_redirect_uri=https://swa2.akumina.dev/profile.html">Login</a></p>
+    <p> <a id="lnk" href="/login?post_login_redirect_uri=https://swa2.akumina.dev/profile.html">Login</a></p>
   </main>
 </body>
 <script>
@@ -20,6 +20,17 @@
     const { text } = await (await fetch(`/api/message?name=Udai`)).json();
     document.querySelector('#name').textContent = text;
   }())
+  async function getUser() {
+        const response = await fetch('/.auth/me');
+        const payload = await response.json();
+        const { clientPrincipal } = payload;
+        return clientPrincipal;
+    }
+if(await getUser()==null)
+{
+  document.querySelector('#lnk').attributes["href"]="/logout";
+  document.querySelector('#lnk').textContent="Logout";
+}
 </script>
 
 </html>
