@@ -27,7 +27,7 @@
     if (clientPrincipal != null) {
       const { text } = await (await fetch(`/api/message?name=Udai`)).json();
       document.querySelector('#name').textContent = text;
-      document.querySelector('#lnk').attributes["href"] = "/logout";
+      document.querySelector('#lnk').textContent= "Logout";
       document.querySelector('#lnk').setAttribute("href","/logout");
     }
   }())
