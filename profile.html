@@ -13,7 +13,7 @@
         <h1>Vanilla JavaScript App</h1>
         <p>Loading content from the API: <b id="name">...</b></p>
         <p>User Details:<b id="dtl">...</b></p>
-        <p> <a href="/logout">Logout</a></p>
+        <p> <a id="lnk" href="/logout">Logout</a></p>
     </main>
 </body>
 <script>
@@ -22,7 +22,7 @@
         const payload = await response.json();
         const { clientPrincipal } = payload;
         if (clientPrincipal != null) {
-            document.querySelector('#dtl').textContent = response;
+            document.querySelector('#dtl').textContent = JSON.stringify(clientPrincipal);
             const { text } = await (await fetch(`/api/message?name=Udai`)).json();
             document.querySelector('#name').textContent = text;
             document.querySelector('#lnk').textContent = "Logout";
