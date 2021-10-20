@@ -12,17 +12,23 @@
     <main>
         <h1>Vanilla JavaScript App</h1>
         <p>Loading content from the API: <b id="name">...</b></p>
+        <p>User Details:<b id="dtl">...</b></p>
         <p> <a href="/logout">Logout</a></p>
     </main>
 </body>
 <script>
-    async function getUserInfo() {
+    (async function () {
         const response = await fetch('/.auth/me');
         const payload = await response.json();
         const { clientPrincipal } = payload;
-        return clientPrincipal;
-    }
-    console.log(getUserInfo());
+        if (clientPrincipal != null) {
+            document.querySelector('#dtl').textContent = response;
+            const { text } = await (await fetch(`/api/message?name=Udai`)).json();
+            document.querySelector('#name').textContent = text;
+            document.querySelector('#lnk').textContent = "Logout";
+            document.querySelector('#lnk').setAttribute("href", "/logout");
+        }
+    }())
 </script>
 
 </html>
